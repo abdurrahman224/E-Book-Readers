@@ -8,7 +8,8 @@ import Home from "./components/Home/Home";
 import BookDates from "./components/BookDates/BookDates";
 import ListedBooks from "./components/ListedBooks/ListedBooks";
 
-
+import { ToastContainer } from "react-toastify";
+import PagestoRead from "./components/PagestoRead/PagestoRead";
 
 let router = createBrowserRouter([
   {
@@ -26,10 +27,14 @@ let router = createBrowserRouter([
         loader: () => fetch("/booksData.json"),
       },
       {
-       path:'listedBooks',
-       Component: ListedBooks,
-       loader: ()=>fetch('/booksData.json')
-
+        path: "listedBooks",
+        Component: ListedBooks,
+        loader: () => fetch("/booksData.json"),
+      },
+      {
+        path: "PagestoRead",
+        Component: PagestoRead,
+        
       },
     ],
   },
@@ -37,6 +42,7 @@ let router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />{" "}
+    <RouterProvider router={router} />
+    <ToastContainer />
   </StrictMode>
 );

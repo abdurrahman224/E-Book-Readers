@@ -1,69 +1,118 @@
-import React from "react";
+
+
+import React, { useState, useEffect, useRef } from "react";
 import { Link, NavLink } from "react-router";
+import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
-  const home = (
-    <>
-      <NavLink to="/">Home</NavLink>
-    </>
-  );
-  const Listed = (
-    <>
-      <NavLink to="listedBooks">Listed Books</NavLink>
-    </>
-  );
-  const Pages = (
-    <>
-      <NavLink to="book">Pages to Read</NavLink>
-    </>
-  );
+  const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef(); // Mobile menu
+
+  const navLinks = [
+    { path: "/", label: "Home" },
+    { path: "/listedBooks", label: "Listed Books" },
+    { path: "/PagestoRead", label: "Pages to Read" },
+  ];
+
+  // Click outside listener
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+
   return (
-    <div className="navbar  shadow-smc ">
-      <div className="navbar-start gap-4 hover:text-[#23BE0A]">
-        <div className="dropdown ">
-          <div tabIndex={0} className="btn  lg:hidden hover:bg-[#23BE0A]">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+    <nav className="bg-white shadow-md sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <div className="flex items-center gap-4">
+            {/* Mobile menu button */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="lg:hidden text-gray-700 hover:text-[#23BE0A] focus:outline-none focus:ring-2 focus:ring-[#23BE0A] rounded-md p-2"
             >
-              {" "}
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />{" "}
-            </svg>
+              {isOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+
+            <Link
+              to="/"
+              className="text-sm md:text-2xl font-bold text-gray-800 hover:text-[#23BE0A] transition"
+            >
+              E-Book Readers
+            </Link>
           </div>
-          <ul
-            tabIndex="-1"
-            className="menu menu-sm dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow"
-          >
-            <li>{home}</li>
-            <li>{Listed}</li>
-            <li>{Pages}</li>
-          </ul>
+
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex space-x-2 ">
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.path}
+                to={link.path}
+                className={({ isActive }) =>
+                  `px-4 py-2 rounded-md text-xl  font-medium transition  ${
+                    isActive
+                      ? "text-[#23BE0A] font-bold"
+                      : "text-gray-700 hover:text-[#23BE0A] hover:bg-gray-50"
+                  }`
+                }
+              >
+                {link.label}
+              </NavLink>
+            ))}
+          </div>
+
+          {/* Buttons */}
+          <div className="flex gap-3">
+            <button className="px-4 py-2 bg-[#23BE0A] text-white rounded-md hover:bg-[#1fa308] transition text-sm md:text-base">
+              Sign In
+            </button>
+            <button className="px-4 py-2 bg-[#59C6D2] text-white rounded-md hover:bg-[#45b3c0] transition text-sm md:text-base">
+              Sign Up
+            </button>
+          </div>
         </div>
-        <Link to= '/'>
-         
-          <a className=" md:text-2xl font-bold">E-Book Readers</a>
-        </Link>
       </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          <li className="hover:text-[#23BE0A] font-bold ">{home}</li>
-          <li>{Listed}</li>
-          <li>{Pages}</li>
-        </ul>
-      </div>
-      <div className="navbar-end gap-4">
-        <a className="btn btn-outline bg-[#23BE0A] text-white">Sign In</a>
-        <a className="btn btn-outline  bg-[#59C6D2] text-white ">Sign Up</a>
-      </div>
-    </div>
+
+      {/* Mobile Navigation */}
+      {isOpen && (
+        <div
+          ref={menuRef}
+          className="lg:hidden bg-white border-t border-gray-200"
+        >
+          <div className="px-4 pt-2 pb-3 space-y-1">
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.path}
+                to={link.path}
+                onClick={() => setIsOpen(false)}
+                className={({ isActive }) =>
+                  `block px-4 py-2 rounded-md text-base font-medium transition ${
+                    isActive
+                      ? "text-[#23BE0A] font-bold bg-gray-50"
+                      : "text-gray-700 hover:text-[#23BE0A] hover:bg-gray-50"
+                  }`
+                }
+              >
+                {link.label}
+              </NavLink>
+            ))}
+          </div>
+        </div>
+      )}
+    </nav>
   );
 };
 

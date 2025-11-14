@@ -10,8 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/x-charts": "^8.18.0",
     "@tailwindcss/vite": "^4.1.17",
     "bootstrap": "^5.3.8",
+    "lucide-react": "^0.553.0",
     "react": "^19.2.0",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.2.0",
@@ -19,6 +23,7 @@
     "react-router": "^7.9.5",
     "react-router-dom": "^7.9.5",
     "react-tabs": "^6.1.0",
+    "react-toastify": "^11.0.5",
     "tailwindcss": "^4.1.17"
   },
   "devDependencies": {
