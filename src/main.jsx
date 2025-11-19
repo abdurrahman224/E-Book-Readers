@@ -18,7 +18,7 @@ let router = createBrowserRouter([
   {
     path: "/",
     Component: Root,
-      
+
     children: [
       {
         path: "/",
@@ -37,24 +37,18 @@ let router = createBrowserRouter([
       {
         path: "PagestoRead",
         Component: PagestoRead,
-        
-      },{
-path:'create-account',
-Component:Createanaccount
-
-
-      
-      },{
-path:'login',
-Component:SineUp
-
-
       },
       {
-path:'userprofile',
-Component:UserProfile
-
-
+        path: "create-account",
+        Component: Createanaccount,
+      },
+      {
+        path: "login",
+        Component: SineUp,
+      },
+      {
+        path: "userprofile",
+        Component: UserProfile,
       },
     ],
   },
