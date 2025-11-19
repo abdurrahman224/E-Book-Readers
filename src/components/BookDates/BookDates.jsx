@@ -32,11 +32,13 @@ const BookDates = () => {
   const handleMarkWishlist = (id) => {
     addToStoredWishlist(id);
   };
+  console.log(currentBookId);
+  
   return (
     <div className="flex flex-col lg:flex-row gap-10 p-6 ">
       <figure className="w-full lg:w-1/2 flex justify-center items-center overflow-hidden ">
         <img
-          className="h-[320px] sm:h-[420px] lg:h-[500px]  w-full object-cover transition-transform duration-700 hover:scale-105 rounded-xl"
+          className="`h-[320px]` sm:h-[420px] lg:h-[500px]  w-full object-cover transition-transform duration-700 hover:scale-105 rounded-xl"
           src={image}
           alt={bookName}
         />

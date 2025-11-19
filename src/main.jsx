@@ -10,6 +10,9 @@ import ListedBooks from "./components/ListedBooks/ListedBooks";
 
 import { ToastContainer } from "react-toastify";
 import PagestoRead from "./components/PagestoRead/PagestoRead";
+import Createanaccount from "./components/Createanaccount/Createanaccount";
+import SineUp from "./components/SineUp/SineUp";
+import UserProfile from "./components/UserProfile/UserProfile";
 
 let router = createBrowserRouter([
   {
@@ -35,6 +38,23 @@ let router = createBrowserRouter([
         path: "PagestoRead",
         Component: PagestoRead,
         
+      },{
+path:'create-account',
+Component:Createanaccount
+
+
+      
+      },{
+path:'login',
+Component:SineUp
+
+
+      },
+      {
+path:'userprofile',
+Component:UserProfile
+
+
       },
     ],
   },

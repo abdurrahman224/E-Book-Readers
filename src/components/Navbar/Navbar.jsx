@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, NavLink } from "react-router";
 import { Menu, X } from "lucide-react";
+import Login from "../Login/Login";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -75,13 +76,8 @@ const Navbar = () => {
           </div>
 
           {/* Buttons */}
-          <div className="flex gap-3">
-            <button className="px-4 py-2 bg-[#23BE0A] text-white rounded-md hover:bg-[#1fa308] transition text-sm md:text-base">
-              Sign In
-            </button>
-            <button className="px-4 py-2 bg-[#59C6D2] text-white rounded-md hover:bg-[#45b3c0] transition text-sm md:text-base">
-              Sign Up
-            </button>
+          <div >
+            <Login ></Login>
           </div>
         </div>
       </div>

@@ -10,20 +10,20 @@ import { useEffect, useState } from "react";
 const PagestoRead = () => {
 
     const  [Book ,setBook] = useState([])
-    const [loading , setLoading] = useState(true)
+    const [ , setLoading] = useState(true)
 useEffect(() => {
   fetch('/booksData.json')
     .then(res => res.json())
     .then(data => {
-      setBook(data);        // set your books state
-      setLoading(false);    // set loading false after data is loaded
+      setBook(data);        
+     
     })
     .catch(err => {
       console.error(err);
-      setLoading(false);    // set loading false even on error
+      setLoading(false);  
     });
 }, []);
-
+ 
 const bookName = Book.map(book=>book.bookName)
 const totalPages = Book.map(book=>book.totalPages)
 
